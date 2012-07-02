@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface Dropping : UIView
+{
+	id parent;
+}
+
+
+- (id)initWithFrame:(CGRect)frame delegate:(id) viewDelegate;
+
+
 
 @end

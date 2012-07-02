@@ -33,26 +33,6 @@
     return self;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	startLocation = [[touches anyObject] locationInView:sprite];
-}
-
-
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	if (sprite.dragInProgress)
-	{
-		touchPoint = [[touches anyObject] locationInView: sprite];
-		
-		CGRect frame = sprite.frame;
-		frame.origin.x += touchPoint.x - startLocation.x;
-		frame.origin.y += touchPoint.y - startLocation.y;
-		[sprite setFrame: frame];
-	}
-}
-
-
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect

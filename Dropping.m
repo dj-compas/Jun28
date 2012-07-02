@@ -7,15 +7,18 @@
 //
 
 #import "Dropping.h"
+#import "Sprite.h"
 
 @implementation Dropping
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame delegate:(id) viewDelegate
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
         self.backgroundColor = [UIColor redColor];
+		
+		parent = viewDelegate;
     }
     
     return self;
@@ -24,6 +27,9 @@
 - (void)drawRect:(CGRect)dirtyRect
 {
     // Drawing code here.
+	SEL sel = @selector(parentFunction);
+	//[parent parentFunction];
+	[parent performSelector:sel withObject:nil afterDelay:1];
 }
 
 @end

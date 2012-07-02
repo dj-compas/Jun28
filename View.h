@@ -13,8 +13,6 @@
 {
 	UIImage *space;
     Sprite *sprite;
-    CGPoint startLocation;
-	CGPoint touchPoint;
 }
 
 @end

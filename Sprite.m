@@ -22,41 +22,48 @@
 		sprite = [UIImage imageNamed:@"invader.png"];
 		imageBounds = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
 		
-		x=0;
-		y=0;
-		
 		// 
 		//[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateSprite) userInfo:nil repeats:YES];
     }
     return self;
 }
 
-- (void) updateSprite
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	x -= 20;
-	NSLog(@"update sprite!!");
+	startLocation = [[touches anyObject] locationInView:self];
 }
-
-- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
-	
-	//Now call the touchesBegan:withEvent: method of the View.
-	[[self nextResponder] touchesBegan: touches withEvent: event];
-}
-
 
 - (void) touchesMoved: (NSSet *) touches withEvent: (UIEvent *) event {
-	dragInProgress = YES;
-	NSLog(@"drag yes and moving");
-	//Call the touchesMoved:withEvent: method of the View.
-	[[self nextResponder] touchesMoved: touches withEvent: event];
+	touchPoint = [[touches anyObject] locationInView: self];
+	
+	CGRect frame = self.frame;
+	frame.origin.x += touchPoint.x - startLocation.x;
+	frame.origin.y += touchPoint.y - startLocation.y;
+	[self setFrame: frame];
 }
 
+- (void) touchesEnded: (NSSet *) touches withEvent: (UIEvent *) event
+{
+	// get number of touches
+	int taps = [[touches anyObject] tapCount];
+	NSLog(@"%d", taps);
+	
+	if (taps == 1 && !beamActive)
+	{
+		beamActive = YES;
+		int beamWidth = 10;
+		int beamHeight = 20;
+		CGRect frame = CGRectMake(self.frame.size.width/2 - beamWidth/2, self.frame.size.height, beamWidth, beamHeight);
+		beam = [[Dropping alloc] initWithFrame:frame delegate:self];
+		[self addSubview:beam];
+	}
+}
 
-- (void) touchesEnded: (NSSet *) touches withEvent: (UIEvent *) event {
-	dragInProgress = NO;
-	NSLog(@"drag no");
-	//Now call the touchesEnded:withEvent: method of the View.
-	[[self nextResponder] touchesEnded: touches withEvent: event];
+-(void) parentFunction
+{
+	NSLog(@"from parent function!!");
+	beamActive = NO;
+	[beam removeFromSuperview];
 }
 
 // Only override drawRect: if you perform custom drawing.

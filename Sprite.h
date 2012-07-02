@@ -13,11 +13,14 @@
 {
 	UIImage *sprite;
 	CGRect imageBounds;
-	CGFloat x;
-	CGFloat y;
-	BOOL dragInProgress;
+	CGPoint startLocation;
+	CGPoint touchPoint;
+	BOOL beamActive;
+	UIView *beam;
 }
 
 @property (assign, nonatomic) BOOL dragInProgress;
+
+-(void) parentFunction;
 
 @end
