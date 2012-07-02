@@ -46,7 +46,7 @@
 {
 	// get number of touches
 	int taps = [[touches anyObject] tapCount];
-	NSLog(@"%d", taps);
+	NSLog(@"taps: %d", taps);
 	
 	if (taps == 1 && !beamActive)
 	{
@@ -59,9 +59,8 @@
 	}
 }
 
--(void) parentFunction
+-(void) killBeam
 {
-	NSLog(@"from parent function!!");
 	beamActive = NO;
 	[beam removeFromSuperview];
 }

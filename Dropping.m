@@ -19,17 +19,35 @@
         self.backgroundColor = [UIColor redColor];
 		
 		parent = viewDelegate;
+		
+		
     }
     
     return self;
 }
 
+-(void) moveDown
+{
+	[Dropping animateWithDuration:.4
+						  delay:0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^{
+						 CGFloat ty = 480;
+						 self.transform = CGAffineTransformMakeTranslation(0, ty);
+					 }
+					 completion:^(BOOL finished){
+						 if (finished)
+						 {
+							 [parent killBeam];
+						 }
+					 }
+	 ];
+}
+
 - (void)drawRect:(CGRect)dirtyRect
 {
     // Drawing code here.
-	SEL sel = @selector(parentFunction);
-	//[parent parentFunction];
-	[parent performSelector:sel withObject:nil afterDelay:1];
+	[self moveDown];
 }
 
 @end

@@ -16,6 +16,6 @@
 
 - (id)initWithFrame:(CGRect)frame delegate:(id) viewDelegate;
 
-
+-(void) moveDown;
 
 @end

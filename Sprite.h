@@ -16,11 +16,11 @@
 	CGPoint startLocation;
 	CGPoint touchPoint;
 	BOOL beamActive;
-	UIView *beam;
+	Dropping *beam;
 }
 
 @property (assign, nonatomic) BOOL dragInProgress;
 
--(void) parentFunction;
+-(void) killBeam;
 
 @end
